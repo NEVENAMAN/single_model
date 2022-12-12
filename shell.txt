@@ -1,0 +1,52 @@
+1- py manage.py shell
+
+   from user_app import User
+
+2- >>> User.objects.create(first_name = 'neven' , last_name = 'amen' , email_address = 'neven@gmail.com' , age = 22)
+<User: User object (1)>
+>>> User.objects.create(first_name = 'soso' ,last_name = 'mubark' , email_address = 'soso@gmail.com' , age = 15)
+<User: User object (2)>
+>>> User.objects.create(first_name = 'ola' , last_name = 'sqer' ,email_address = 'ola@gmail.com' , age = 32)
+<User: User object (3)>
+
+3- >>> User.objects.all().values()
+<QuerySet [{'id': 1, 'first_name': 'neven', 'last_name': 'amen', 'email_address': 'neven@gmail.com', 'age': 22},
+           {'id': 2, 'first_name': 'soso', 'last_name': 'mubark', 'email_address': 'soso@gmail.com', 'age': 15},
+           {'id': 3, 'first_name': 'ola', 'last_name': 'sqer', 'email_address': 'ola@gmail.com', 'age': 32}]>
+4-> User.objects.last().__dict__
+{'_state': <django.db.models.base.ModelState object at 0x00000160EDB95550>,
+ 'id': 3, 'first_name': 'ola', 'last_name': 'sqer', 'email_address': 'ola@gmail.com', 'age': 32}
+
+5- >>> User.objects.first().__dict__
+{'_state': <django.db.models.base.ModelState object at 0x00000160EDB95BD0>,
+ 'id': 1, 'first_name': 'neven', 'last_name': 'amen', 'email_address': 'neven@gmail.com', 'age': 22}
+
+6->>> c= User.objects.get(id = 3)
+>>> c.first_name = 'Pancakes'
+>>> c.save()
+>>> User.objects.last().__dict__
+{'_state': <django.db.models.base.ModelState object at 0x00000160EDB96CD0>,
+ 
+'id': 3, 'first_name': 'Pancakes', 'last_name': 'sqer', 'email_address': 'ola@gmail.com', 'age': 32}
+
+7->>> c = User.objects.get(id = 2)
+>>> c.delete()
+(1, {'user_app.User': 1})
+>>> User.objects.all().values()
+<QuerySet [
+ {'id': 1, 'first_name': 'neven', 'last_name': 'amen', 'email_address': 'neven@gmail.com', 'age': 22},
+ {'id': 3, 'first_name': 'Pancakes', 'last_name': 'sqer', 'email_address': 'ola@gmail.com', 'age': 32}]>
+
+8- >>> User.objects.order_by('first_name')
+<QuerySet [<User: User object (3)>, <User: User object (1)>]>
+
+9->>> User.objects.order_by('-first_name')
+<QuerySet [<User: User object (1)>, <User: User object (3)>]>
+
+--------------------------------------------------------------
+id	first_name	last_name	email_address	age
+--------------------------------------------------------------
+1	neven	      amen        neven@gmail.com	 22
+--------------------------------------------------------------
+3	Pancakes	sqer  	ola@gmail.com      32
+--------------------------------------------------------------
