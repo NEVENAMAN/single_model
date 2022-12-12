@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>insert data </title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css' %}" >
+    <link rel="stylesheet" href="{% static 'css/min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap_min.css' %}">
+    <style>
+        .container{
+            width:1000px;
+            margin:100px auto;
+        }
+        .container table,tr,td{
+            border:1px solid black;
+            padding: 10px 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <form action="/create_Users" method="POST">
+        {% csrf_token %}
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Email</label>
+            <input type="email" class="form-control" id="inputEmail4" placeholder="Email" name="email">
+          </div>
+        <div class="form-group">
+          <label for="inputAddress">first name</label>
+          <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" name="first_name">
+        </div>
+
+        <div class="form-group">
+          <label for="inputAddress2">last name</label>
+          <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" name="last_name">
+        </div><br>
+        <div class="form-group">
+            <label for="inputAddress2">age</label>
+            <input type="text" class="form-control" id="inputAddress2"  name="age">
+          </div>
+        <button type="submit" class="btn btn-primary">Sign in</button>
+      </form>
+      </div>
+    <hr>
+    <div class="container">
+        <h1>All Users</h1><br>
+        <table>
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Name</td>
+                    <td>Family</td>
+                    <td>Email</td>
+                    <td>Age</td>
+                </tr>
+            </thead>
+            {% for user in data %}
+            <tr>
+                <td>{{user.id}}</td>
+                <td>{{user.first_name}}</td>
+                <td>{{user.last_name}}</td>
+                <td>{{user.email_address}}</td>
+                <td>{{user.age}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
